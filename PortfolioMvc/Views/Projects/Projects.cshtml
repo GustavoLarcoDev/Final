@@ -1,0 +1,73 @@
+﻿@model IEnumerable<PortfolioMvc.Models.Projects>
+
+@{
+    ViewData["Title"] = "Coding Projects";
+}
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    body {
+        background-image: url('/codingbackground.gif');
+        background-color: rgba(255, 255, 255, 0.8);
+        background-size: cover;
+        background-position: center;
+        background-repeat: repeat;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: none;
+    }
+</style>
+
+<body>
+    <div class="content-wrapper">
+        @* <h1>Projects</h1> *@
+
+        @* <p> *@
+        @*     <a asp-action="Create" class="btn btn-primary">Create New</a> *@
+        @* </p> *@
+
+        <div class="d-flex flex-wrap justify-content-center">
+            @foreach (var item in Model)
+            {
+                <div class="card m-3" style="width: 18rem;">
+                    <img src="@item.Image" class="card-img-top" alt="@item.Title" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="card-text">@item.Context</p>
+                        <p class="card-text">
+                            <small class="text-body-secondary">
+                                Release Date: @item.ReleaseDate.ToString("MMMM dd, yyyy")
+                            </small>
+                        </p>
+                        <p class="card-text">
+                            <a href="@item.Code" class="btn btn-outline-primary" target="_blank">View Repository</a>
+                        </p>
+                    </div>
+                    <div class="card-footer text-center">
+                        @* <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Edit</a> *@
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Details</a>
+                        @* <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Delete</a> *@
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>
